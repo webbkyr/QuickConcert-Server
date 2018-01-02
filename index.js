@@ -30,12 +30,13 @@ app.use(
 //clicks
 
 app.get('/api/concerts', (req, res) => {
-  fetch(`https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=usher&apikey=${process.env.TKM_KEY}`)
+  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=chicago&startDateTime=2018-01-02T11:39:00Z&endDateTime=2018-01-03T11:39:00Z&apikey=${process.env.TKM_KEY}`)
     .then(res => {
-      console.log(res);
       return res.json(data);
     })
-    .then(concerts => res.json(concerts)); 
+    .then(concerts => {
+      res.json(concerts._embedded.events);
+    }); 
 });
 
 function runServer(port = PORT) {
