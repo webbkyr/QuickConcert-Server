@@ -35,7 +35,7 @@ app.get('/api/concerts', (req, res) => {
       console.log(res);
       return res.json(data);
     })
-    .then(concerts => res.json(concerts)); 
+    .then(concerts => res.json(concerts._embedded.attractions)); 
 });
 
 function runServer(port = PORT) {
