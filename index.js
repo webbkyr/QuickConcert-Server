@@ -34,9 +34,13 @@ app.get('/api/concerts', (req, res) => {
     .then(res => {
       return res.json(data);
     })
+<<<<<<< HEAD
     .then(concerts => {
       res.json(concerts._embedded.events);
     }); 
+=======
+    .then(concerts => res.json(concerts._embedded.attractions)); 
+>>>>>>> cad6c4b4dd5b176a93c9130e83a9a56ef697aa8a
 });
 
 function runServer(port = PORT) {
