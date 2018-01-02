@@ -7,6 +7,7 @@ const data = require('./dummydata');
 const {PORT, CLIENT_ORIGIN} = require('./config');
 const {dbConnect} = require('./db-mongoose');
 const fetch = require('node-fetch');
+//require body parser/json
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.use(
 //clicks
 
 app.get('/api/concerts', (req, res) => {
-  fetch(`https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=taylorswift&apikey=${process.env.TKM_KEY}`)
+  fetch(`https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=usher&apikey=${process.env.TKM_KEY}`)
     .then(res => {
       console.log(res);
       return res.json(data);
