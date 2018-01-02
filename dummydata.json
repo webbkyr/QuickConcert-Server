@@ -1,0 +1,28 @@
+[{
+  "title": "Some Concert",
+  "artist": "Artist",
+  "location": "Los Angeles",
+  "venue": "Staples Center",
+  "localTime": "2100",
+  "url": "http://www.ticketmaster.com/123435434",
+  "genre": "pop"
+},
+{
+  "title": "Some Concert",
+  "artist": "Artist",
+  "location": "Los Angeles",
+  "venue": "Staples Center",
+  "localTime": "2100",
+  "url": "http://www.ticketmaster.com/123435434",
+  "genre": "pop"
+},
+{
+  "title": "Some Concert",
+  "artist": "Artist",
+  "location": "Los Angeles",
+  "venue": "Staples Center",
+  "localTime": "2100",
+  "url": "http://www.ticketmaster.com/123435434",
+  "genre": "pop"
+}
+]

@@ -3,7 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-
+const data = require('./dummydata');
 const {PORT, CLIENT_ORIGIN} = require('./config');
 const {dbConnect} = require('./db-mongoose');
 
@@ -20,6 +20,15 @@ app.use(
     origin: CLIENT_ORIGIN
   })
 );
+
+// app.get('/api/concert', (req, res) => {
+//     // req.params == location
+//   fetch('ticketmaster....').then(res => res.json()).then(//dosomething else)
+// });
+
+app.get('/api/concerts', (req, res) => {
+  res.json(data);
+});
 
 function runServer(port = PORT) {
   const server = app
