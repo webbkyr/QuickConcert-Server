@@ -1,11 +1,12 @@
 'use strict';
-
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const data = require('./dummydata');
 const {PORT, CLIENT_ORIGIN} = require('./config');
 const {dbConnect} = require('./db-mongoose');
+const fetch = require('node-fetch');
 
 const app = express();
 
@@ -25,9 +26,15 @@ app.use(
 //     // req.params == location
 //   fetch('ticketmaster....').then(res => res.json()).then(//dosomething else)
 // });
+//clicks
 
 app.get('/api/concerts', (req, res) => {
-  res.json(data);
+  fetch(`https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=taylorswift&apikey=${process.env.TKM_KEY}`)
+    .then(res => {
+      console.log(res);
+      return res.json(data);
+    })
+    .then(concerts => res.json(concerts)); 
 });
 
 function runServer(port = PORT) {
