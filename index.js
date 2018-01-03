@@ -8,6 +8,7 @@ const {dbConnect} = require('./db-mongoose');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const concertsRouter = require('./routers/concerts-router');
+const { Event } = require('./db/models')
 
 const app = express();
 
