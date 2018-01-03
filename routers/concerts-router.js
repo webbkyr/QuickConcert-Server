@@ -2,13 +2,16 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
+const ajax = require('ajax-request');
+
 
 const { DATABASE, PORT } = require('../config');
 
 /* ======GET/READ REQUESTS ======= */
 
 router.get('/concerts', (req, res) => {
-  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=chicago&startDateTime=2018-01-02T11:39:00Z&endDateTime=2018-01-03T11:39:00Z&apikey=${process.env.TKM_KEY}`)
+  console.log(req);
+  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&city=atlanta&startDateTime=2018-01-03T11:39:00Z&endDateTime=2018-01-04T11:39:00Z&apikey=${process.env.TKM_KEY}`)
     .then(res => {
       return res.json(res);
     })
