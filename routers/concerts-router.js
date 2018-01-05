@@ -46,6 +46,7 @@ router.get('/concerts/:id', (req, res) => {
 });
 
 router.post('/concerts', (req, res) => {
+  console.log(req.body)
   const requiredFields = ['eventName', 'creator'];
   for (let i=0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -82,7 +83,7 @@ router.put('/concerts/:id', (req, res) => {
     });
   }
   const updated = {};
-  const updatableFields = ['eventName', 'attendees'];
+  const updatableFields = ['eventName', 'attendee'];
   updatableFields.forEach(field => {
     if(field in req.body){
       updated[field] = req.body[field];
