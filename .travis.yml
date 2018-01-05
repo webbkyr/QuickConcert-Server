@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: j0iKS5m7AcQ8IXm+6i0gHDm/WUmkp0mKy89RlvOQcf34tK9vbMzjIb7Uqc0C03ldOWOwS+9f0ZaprhuvqkI8fDqPGEP9iqNBtKcahgX2gd8PSLuddN5rMN5KBW1Nif50QpDIzKv8bEBFN1e+O8WFvwmzFv/R8fye+cn1fGIeL7qRFeBpeH0PfA05jhOJiRvLCtGn0gkrp49qLhRplpAYnXbsfGeMM2nkaoU5Cmp8B90yks3ButWoYMAUJXgH8YV7TxZ0PU3oUzUd1RxQI+9gqr/Jh6fou0EBBgr/5m0hzmGrdvtsHi/nkM/Ep8FuXvwC4wFOzEPahBTOYO6XptLy+w/O8c04Mi98HtPSMXIIkGtdazvDlilmagJN/KLhUXea6fh1Trzocevt/HP7LwjvOb9E8OiI2qHnOMzMNKTPdrzu4L483Qshgo23im7cNnpEYclm1tBZUn5TY+8C3DQjDrjQXKNEGDdmalF7nEYn2IVlXscMEVBUM5XKvVViVBuTtkoBKWdRZmqbYtcHm/5rYVaZ9MDj0sBvUXnEUSiLYCHQrTLIjYaeAYVT5jcMAIt6aZ3b6Bt5XBAE59A1mFPSTZKlrXjm2gBvj/2JQ2eNNfcLNQQrKvDh8vtYlMKd9G0m6kkl+iaffh8hzfuwbh3VtB1+mg5uu6f1Sv5jCCOHSDY=
+  app: quickconcert
+  on:
+    repo: webbkyr/QuickConcert-Server
