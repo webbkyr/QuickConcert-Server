@@ -4,10 +4,6 @@ const router = express.Router();
 const fetch = require('node-fetch');
 const { Event } = require('../db/models');
 
-
-const { DATABASE, PORT } = require('../config');
-
-
 /* ======GET/READ REQUESTS ======= */
 
 router.get('/concerts', (req, res) => {
@@ -16,8 +12,6 @@ router.get('/concerts', (req, res) => {
   const startDateTime = todaysDate.toISOString().slice(0, 19)+'Z';
   const tomorrow = new Date(todaysDate.setDate(todaysDate.getDate()+2));
   const endDateTime = tomorrow.toISOString().slice(0,11)+'01:00:00Z';
-  // console.log(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${process.env.TKM_KEY}&startDateTime=${startDateTime}&endDateTime=${endDateTime}&city=${req.query.city}&countryCode=US&classificationName=music`);
-
 
   fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${process.env.TKM_KEY}&startDateTime=${startDateTime}&endDateTime=${endDateTime}&city=${req.query.city}&countryCode=US&classificationName=music`)
 
@@ -35,8 +29,7 @@ router.get('/concerts/:id', (req, res) => {
   Event
     .findById(req.params.id)
     .then(event => res.json(event.apiRepr()))
-    .catch(err => {
-      console.error(err);
+    .catch(() => {
       res.status(500).json({error: 'Something went wrong with our server.'});
     });
 });
@@ -48,7 +41,6 @@ router.post('/concerts', (req, res) => {
     const field = requiredFields[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`;
-      console.error(message);
       return res.status(400).send(message);
     }
   }
@@ -62,11 +54,9 @@ router.post('/concerts', (req, res) => {
       }]
     })
     .then(event => {
-      console.log(event);
       res.status(201).json(event.apiRepr());
     })
-    .catch(err => {
-      console.error(err);
+    .catch(() => {
       res.status(500).json({error: 'Something went wrong with our server!'});
     });
 });
@@ -89,7 +79,7 @@ router.put('/concerts/:id', (req, res) => {
     .then(updatedEvent => {
       res.status(201).json(updatedEvent);
     })
-    .catch(err => {
+    .catch(() => {
       res.status(500).json({message: 'Something went wrong with our server'});
     });
 });
@@ -100,8 +90,7 @@ router.delete('/concerts/:id', (req, res) => {
     .then(() => {
       res.status(204).json({message: 'success'});
     })
-    .catch(err => {
-      console.error(err);
+    .catch(() => {
       res.status(500).json({error: 'Something went wrong with our server.'});
     });
 });
@@ -111,7 +100,7 @@ router.delete('/concerts/:id1/attendee/:id2', (req, res) => {
     { _id: req.params.id1 },
     { $pull: { 'attendees': { _id: req.params.id2 } } }
   )
-    .then(result => {
+    .then(() => {
       res.status(204).end();
     });
 });
