@@ -1,45 +1,53 @@
-# Thinkful Backend Template
+<p align='center'>
+    <img width='600' height='450'src='https://i.imgur.com/wMKispW.png'>	
+</p>
 
-A template for developing and deploying Node.js apps.
+## purpose
 
-## Getting started
+An event driven platform in which users can search for concerts in a specified city (concert results are for the day of, up until the next day of your search). Users are able to buy tickets and 'share' the event with their friends via a unique url that is generated on the backend. 
 
-### Setting up a project
+[LIVE Demo](http://quickconcert.netlify.com/)
 
-* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/Thinkful-Ed/backend-template YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
-* Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left unchecked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+## API
+* [Ticketmaster](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/)
+* Quick Concert front-end code [Client](https://github.com/webbkyr/QuickConcert-Client)
 
-### Working on the project
+Our API uses a proxy of api/concerts to make the call to Ticketmaster on the server. We append a query string on the front end to the base url for the FETCH request that contains the user's location. So, the server receives the following:
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the development task: `npm start`
-    * Starts a server running at http://localhost:8080
-    * Automatically restarts when any of your files change
+    api/concerts?city=${location}
 
-## Databases
 
-By default, the template is configured to connect to a MongoDB database using Mongoose.  It can be changed to connect to a PostgreSQL database using Knex by replacing any imports of `db-mongoose.js` with imports of `db-knex.js`, and uncommenting the Postgres `DATABASE_URL` lines in `config.js`.
+### TL;DR
+Server supports the following: 
 
-## Deployment
+* GET concerts via our proxy to Ticketmaster. 
+* POST unique, shareable events
+* GET the shareable events
+* PUT the organizer of the shareable events
 
-Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-command-line).
+TODO: 
 
-### Setting up the project on Heroku
+* Update and delete attendees of those shareable events
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Create the Heroku app: `heroku create PROJECT_NAME`
+## server side folder structure
 
-* If your backend connects to a database, you need to configure the database URL:
-    * For a MongoDB database: `heroku config:set DATABASE_URL=mongodb://USERNAME:PASSWORD@HOST:PORT/DATABASE_NAME`
-    * For a PostgreSQL database: `heroku config:set DATABASE_URL=postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE_NAME`
+```
+    my-server/
+      README.md
+      node_modules/
+      package.json
+      index.js
+      db-mongoose.js
+      config.js
+      db/
+         models.js
+      routers/
+         concerts-router.js
+```
 
-* If you are creating a full-stack app, you need to configure the client origin: `heroku config:set CLIENT_ORIGIN=https://www.YOUR_DEPLOYED_CLIENT.com`
+## want to contribute?
 
-### Deploying to Heroku
+Install Node and npm, clone/fork the repo and run the following command in your project folder to install the dependencies
+    
+    npm install
 
-* Push your code to Heroku: `git push heroku master`
