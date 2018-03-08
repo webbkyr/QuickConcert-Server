@@ -35,7 +35,7 @@ router.get('/concerts/:id', (req, res) => {
 });
 
 router.post('/concerts', (req, res) => {
-
+  console.log('REQUEST BODY >>>>>', req.body);
   const requiredFields = ['eventName', 'creator'];
   for (let i=0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -49,6 +49,11 @@ router.post('/concerts', (req, res) => {
     .create({
       eventName: req.body.eventName,
       creator: req.body.creator,
+      eventDetails: [{
+        concertDate: req.body.eventDetails[0].concertDate,
+        concertTime: req.body.eventDetails[0].concertTime,
+        concertURL: req.body.eventDetails[0].concertURL
+      }],
       attendees: [{
         attendee: req.body.attendee
       }]
@@ -56,7 +61,8 @@ router.post('/concerts', (req, res) => {
     .then(event => {
       res.status(201).json(event.apiRepr());
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err)
       res.status(500).json({error: 'Something went wrong with our server!'});
     });
 });
