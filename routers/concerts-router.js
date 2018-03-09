@@ -74,7 +74,7 @@ router.post('/concerts/:id', (req, res) => {
     eventId, {$push: { 'attendees': { attendee: newAttendee }}}, 
     {upsert: true, new: true})
     .then(event => {
-      res.status(201).json(event.attendees);
+      res.status(201).json(event.attendees[event.attendees.length-1]);
     }).catch(() => res.status(500).json({error: 'Something went wrong'}));
   
 });
@@ -102,7 +102,7 @@ router.put('/concerts/:id', (req, res) => {
     });
 });
 
-router.delete('/concerts/:id', (req, res) => {
+router.delete('/concerts/:concertId', (req, res) => {
   Event
     .findByIdAndRemove(req.params.id)
     .then(() => {
@@ -113,7 +113,7 @@ router.delete('/concerts/:id', (req, res) => {
     });
 });
 
-router.delete('/concerts/:id1/attendee/:id2', (req, res) => {
+router.delete('/concerts/:concertId/:attendeeId', (req, res) => {
   Event.update(
     { _id: req.params.id1 },
     { $pull: { 'attendees': { _id: req.params.id2 } } }
