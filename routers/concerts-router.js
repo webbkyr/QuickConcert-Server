@@ -61,10 +61,22 @@ router.post('/concerts', (req, res) => {
     .then(event => {
       res.status(201).json(event.apiRepr());
     })
-    .catch((err) => {
-      console.log(err)
+    .catch(() => {
       res.status(500).json({error: 'Something went wrong with our server!'});
     });
+});
+
+router.post('/concerts/:id', (req, res) => {
+  const { newAttendee } = req.body;
+  const eventId = req.params.id;
+  
+  Event.findByIdAndUpdate(
+    eventId, {$push: { 'attendees': { attendee: newAttendee }}}, 
+    {upsert: true, new: true})
+    .then(event => {
+      res.status(201).json(event.attendees);
+    }).catch(() => res.status(500).json({error: 'Something went wrong'}));
+  
 });
 
 router.put('/concerts/:id', (req, res) => {
