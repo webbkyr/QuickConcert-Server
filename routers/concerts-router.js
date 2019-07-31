@@ -19,7 +19,6 @@ router.get('/concerts', (req, res) => {
       return res.json(res);
     })
     .then(concerts => {
-      console.log(concerts);
       res.json(concerts._embedded ? concerts._embedded.events : []);
     })
     .catch(e => res.json(e)); 
@@ -35,7 +34,6 @@ router.get('/concerts/:id', (req, res) => {
 });
 
 router.post('/concerts', (req, res) => {
-  console.log('REQUEST BODY >>>>>', req.body);
   const requiredFields = ['eventName', 'creator'];
   for (let i=0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -122,4 +120,5 @@ router.delete('/concerts/:concertId/:attendeeId', (req, res) => {
       res.status(204).end();
     });
 });
+
 module.exports = router;

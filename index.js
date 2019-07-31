@@ -9,6 +9,8 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const concertsRouter = require('./routers/concerts-router');
 const app = express();
+const path = require('path');
+
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
@@ -23,6 +25,8 @@ app.use(
 );
 
 app.use(jsonParser);
+
+
 
 app.use('/api', concertsRouter);
 
